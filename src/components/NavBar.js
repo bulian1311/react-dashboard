@@ -5,6 +5,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import Search from './Search';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -21,8 +23,9 @@ const NavBar = props => {
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <Typography variant="h6" color="inherit" noWrap>
-          Dashboard
+          MagMer
         </Typography>
+        <Search />
       </Toolbar>
     </AppBar>
   );
