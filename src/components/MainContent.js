@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+import ProductList from './ProductList';
+
 const styles = theme => ({
   toolbar: theme.mixins.toolbar,
   content: {
@@ -18,6 +20,7 @@ function MainContent(props) {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
+      <ProductList />
       <Typography paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
