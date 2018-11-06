@@ -7,15 +7,18 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import StarIcon from '@material-ui/icons/Star';
+
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
+    textDecoration: 'none'
   },
   drawerPaper: {
     width: drawerWidth
@@ -38,18 +41,22 @@ function NavDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <ListItem button key="123">
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary="Test 1" />
-        </ListItem>
-        <ListItem button key="456">
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Test 2" />
-        </ListItem>
+        <Link style={{ textDecoration: 'none' }} to="/">
+          <ListItem button key="123">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Домой" />
+          </ListItem>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to="/product">
+          <ListItem button key="456">
+            <ListItemIcon>
+              <StarIcon />
+            </ListItemIcon>
+            <ListItemText primary="Аттракционы" />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   );

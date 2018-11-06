@@ -54,7 +54,7 @@ export class Search extends Component {
             <SearchIcon />
           </div>
           <InputBase
-            placeholder="Search…"
+            placeholder="Поиск"
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput
