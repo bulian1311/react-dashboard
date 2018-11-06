@@ -16,7 +16,7 @@ const styles = theme => ({
   }
 });
 
-function MainContent(props) {
+const MainContent = props => {
   const { classes } = props;
 
   return (
@@ -28,7 +28,7 @@ function MainContent(props) {
       </Switch>
     </main>
   );
-}
+};
 
 MainContent.propTypes = {
   classes: PropTypes.object.isRequired

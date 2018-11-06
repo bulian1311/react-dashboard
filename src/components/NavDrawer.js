@@ -26,7 +26,7 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar
 });
 
-function NavDrawer(props) {
+const NavDrawer = props => {
   const { classes } = props;
 
   return (
@@ -60,7 +60,7 @@ function NavDrawer(props) {
       </List>
     </Drawer>
   );
-}
+};
 
 NavDrawer.propTypes = {
   classes: PropTypes.object.isRequired
