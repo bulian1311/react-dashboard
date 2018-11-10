@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import Context from './Context';
 import axios from 'axios';
 
+import Context from './Context';
+import reducer from './reducer';
+
 class Provider extends Component {
-  state = { products: [] };
+  state = {
+    products: [],
+    visible: 15,
+    dispatch: action => {
+      this.setState(state => reducer(state, action));
+    }
+  };
 
   async componentWillMount() {
     try {
@@ -13,6 +21,12 @@ class Provider extends Component {
       console.error(err.message);
     }
   }
+
+  loadMore = () => {
+    this.setState(prev => {
+      return { visible: prev.visible + this.state.visible };
+    });
+  };
 
   render() {
     return (
