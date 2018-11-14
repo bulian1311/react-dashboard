@@ -5,6 +5,9 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
 
+import Context from '../store/Context';
+import { SEARCH_CHANGE } from '../store/types';
+
 const styles = theme => ({
   search: {
     position: 'relative',
@@ -53,13 +56,25 @@ export class Search extends Component {
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
-          <InputBase
-            placeholder="Поиск"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput
+          <Context.Consumer>
+            {store => {
+              return (
+                <InputBase
+                  onChange={event =>
+                    store.dispatch({
+                      type: SEARCH_CHANGE,
+                      payload: event.target.value
+                    })
+                  }
+                  placeholder="Поиск"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                />
+              );
             }}
-          />
+          </Context.Consumer>
         </div>
       </div>
     );
