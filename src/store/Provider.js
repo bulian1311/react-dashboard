@@ -6,7 +6,7 @@ import reducer from './reducer';
 
 class Provider extends Component {
   state = {
-    products: [],
+    products: null,
     visible: 15,
     dispatch: action => {
       this.setState(state => reducer(state, action));
