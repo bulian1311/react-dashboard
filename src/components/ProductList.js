@@ -16,19 +16,18 @@ const styles = theme => ({
 });
 
 class ProductList extends React.Component {
-  renderList = (store, data) => {
+  renderList = data => {
     let products = [];
 
     if (data) {
       products = data;
     } else {
-      products = store.products;
+      products = this.context.products;
     }
 
-    const { classes } = this.props;
     return (
       <React.Fragment>
-        {products.slice(0, store.visible).map(product => {
+        {products.slice(0, this.context.visible).map(product => {
           return (
             <Item
               key={product.title}
@@ -38,18 +37,25 @@ class ProductList extends React.Component {
           );
         })}
 
-        {products.length > 15 ? (
-          <Button
-            className={classes.button}
-            onClick={e => store.dispatch({ type: LOAD_MORE })}
-          >
-            Загрузить еще...
-          </Button>
-        ) : (
-          ''
-        )}
+        {this.renderMoreButton(products)}
       </React.Fragment>
     );
+  };
+
+  renderMoreButton = products => {
+    const { classes } = this.props;
+
+    if (products.length > 15) {
+      return (
+        <Button
+          className={classes.button}
+          onClick={e => this.context.dispatch({ type: LOAD_MORE })}
+        >
+          Загрузить еще...
+        </Button>
+      );
+    }
+    return '';
   };
 
   renderLoading = () => {
@@ -60,32 +66,27 @@ class ProductList extends React.Component {
     );
   };
 
-  renderSearch = store => {
-    const query = store.searchQuery.toLowerCase();
+  renderSearch = () => {
+    const query = this.context.searchQuery.toLowerCase();
 
-    const searchData = store.products.filter(product => {
+    const searchData = this.context.products.filter(product => {
       const title = product.title.toLowerCase();
       return title.includes(query);
     });
 
-    return this.renderList(store, searchData);
+    return this.renderList(searchData);
   };
 
   render() {
+    console.log(this.context);
     return (
-      <Context.Consumer>
-        {store => {
-          return (
-            <React.Fragment>
-              {store.products
-                ? store.searchQuery
-                  ? this.renderSearch(store)
-                  : this.renderList(store)
-                : this.renderLoading()}
-            </React.Fragment>
-          );
-        }}
-      </Context.Consumer>
+      <React.Fragment>
+        {this.context.products
+          ? this.context.searchQuery
+            ? this.renderSearch()
+            : this.renderList()
+          : this.renderLoading()}
+      </React.Fragment>
     );
   }
 }
@@ -93,5 +94,7 @@ class ProductList extends React.Component {
 ProductList.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+ProductList.contextType = Context;
 
 export default withStyles(styles)(ProductList);
