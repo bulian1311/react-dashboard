@@ -7,6 +7,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import ImageList from './ImageList';
+
 const styles = theme => ({
   root: {
     width: '100%'
@@ -14,18 +16,27 @@ const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular
+  },
+  price: {
+    fontWeight: 'bold'
+    //marginLeft: 100
   }
 });
 
-const Item = props => {
-  const { classes } = props;
+const Item = ({ product, classes }) => {
   return (
     <ExpansionPanel>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography className={classes.heading}>{props.title}</Typography>
+        <Typography className={classes.heading}>{product.title}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <Typography>{props.description}</Typography>
+        <Typography>{product.description}</Typography>
+      </ExpansionPanelDetails>
+      <ExpansionPanelDetails>
+        <Typography className={classes.price}>{product.price}</Typography>
+      </ExpansionPanelDetails>
+      <ExpansionPanelDetails>
+        <ImageList images={product.images} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

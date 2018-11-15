@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import Context from '../store/Context';
-import Item from './Item';
+import Product from './Product';
 import { LOAD_MORE } from '../store/types';
 
 const styles = theme => ({
@@ -28,13 +28,7 @@ class ProductList extends React.Component {
     return (
       <React.Fragment>
         {products.slice(0, this.context.visible).map(product => {
-          return (
-            <Item
-              key={product.title}
-              title={product.title}
-              description={product.description}
-            />
-          );
+          return <Product key={product.title} product={product} />;
         })}
 
         {this.renderMoreButton(products)}
