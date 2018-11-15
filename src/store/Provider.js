@@ -9,6 +9,7 @@ class Provider extends Component {
     products: null,
     visible: 15,
     searchQuery: '',
+    auth: false,
     dispatch: action => {
       this.setState(state => reducer(state, action));
     }

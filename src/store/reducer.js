@@ -1,4 +1,4 @@
-import { LOAD_MORE, SEARCH_CHANGE } from './types';
+import { LOAD_MORE, SEARCH_CHANGE, SIGNIN } from './types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -6,6 +6,8 @@ const reducer = (state, action) => {
       return { ...state, visible: state.visible + 15 };
     case SEARCH_CHANGE:
       return { ...state, searchQuery: action.payload };
+    case SIGNIN:
+      return { ...state, auth: !state.auth };
     default:
       return state;
   }
