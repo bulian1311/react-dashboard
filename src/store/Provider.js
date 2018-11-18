@@ -17,7 +17,7 @@ class Provider extends Component {
 
   async componentWillMount() {
     try {
-      const res = await axios.get('http://magmer-api.herokuapp.com/product');
+      const res = await axios.get('https://magmer-api.herokuapp.com/product');
       this.setState({ products: res.data });
     } catch (err) {
       console.error(err.message);
