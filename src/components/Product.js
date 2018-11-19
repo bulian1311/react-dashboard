@@ -27,7 +27,7 @@ class Product extends React.Component {
 
   showDetails = () => {
     this.setState(state => {
-      return { showDetails: !state.showDetails };
+      return { showDetails: true };
     });
   };
 
