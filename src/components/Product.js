@@ -19,31 +19,47 @@ const styles = theme => ({
   },
   price: {
     fontWeight: 'bold'
-    //marginLeft: 100
   }
 });
 
-const Item = ({ product, classes }) => {
-  return (
-    <ExpansionPanel>
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography className={classes.heading}>{product.title}</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
-        <Typography>{product.description}</Typography>
-      </ExpansionPanelDetails>
-      <ExpansionPanelDetails>
-        <Typography className={classes.price}>{product.price}</Typography>
-      </ExpansionPanelDetails>
-      <ExpansionPanelDetails>
-        <ImageList images={product.images} />
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
-  );
-};
+class Product extends React.Component {
+  state = { showDetails: false };
 
-Item.propTypes = {
+  showDetails = () => {
+    this.setState(state => {
+      return { showDetails: !state.showDetails };
+    });
+  };
+
+  render() {
+    const { product, classes } = this.props;
+    return (
+      <ExpansionPanel onClick={this.showDetails}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography className={classes.heading}>{product.title}</Typography>
+        </ExpansionPanelSummary>
+        {this.state.showDetails ? (
+          <React.Fragment>
+            <ExpansionPanelDetails>
+              <Typography>{product.description}</Typography>
+            </ExpansionPanelDetails>
+            <ExpansionPanelDetails>
+              <Typography className={classes.price}>{product.price}</Typography>
+            </ExpansionPanelDetails>
+            <ExpansionPanelDetails>
+              <ImageList images={product.images} />
+            </ExpansionPanelDetails>
+          </React.Fragment>
+        ) : (
+          ''
+        )}
+      </ExpansionPanel>
+    );
+  }
+}
+
+Product.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Item);
+export default withStyles(styles)(Product);
