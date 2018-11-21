@@ -22,12 +22,12 @@ class ProductList extends React.Component {
     if (data) {
       products = data;
     } else {
-      products = this.context.products;
+      products = this.context.state.products;
     }
 
     return (
       <React.Fragment>
-        {products.slice(0, this.context.visible).map(product => {
+        {products.slice(0, this.context.state.visible).map(product => {
           return <Product key={product.title} product={product} />;
         })}
 
@@ -61,9 +61,9 @@ class ProductList extends React.Component {
   };
 
   renderSearch = () => {
-    const query = this.context.searchQuery.toLowerCase();
+    const query = this.context.state.searchQuery.toLowerCase();
 
-    const searchData = this.context.products.filter(product => {
+    const searchData = this.context.state.products.filter(product => {
       const title = product.title.toLowerCase();
       return title.includes(query);
     });
@@ -72,11 +72,10 @@ class ProductList extends React.Component {
   };
 
   render() {
-    console.log(this.context);
     return (
       <React.Fragment>
-        {this.context.products
-          ? this.context.searchQuery
+        {this.context.state.products
+          ? this.context.state.searchQuery
             ? this.renderSearch()
             : this.renderList()
           : this.renderLoading()}

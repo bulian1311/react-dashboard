@@ -3,16 +3,21 @@ import axios from 'axios';
 
 import Context from './Context';
 import reducer from './reducer';
+import actions from './actions';
 
 class Provider extends Component {
   state = {
+    login: '',
+    password: '',
+    token: '',
     products: null,
     visible: 15,
     searchQuery: '',
-    auth: false,
-    dispatch: action => {
-      this.setState(state => reducer(state, action));
-    }
+    auth: false
+  };
+
+  dispatch = action => {
+    this.setState(state => reducer(state, action));
   };
 
   async componentWillMount() {
@@ -24,15 +29,11 @@ class Provider extends Component {
     }
   }
 
-  loadMore = () => {
-    this.setState(prev => {
-      return { visible: prev.visible + this.state.visible };
-    });
-  };
-
   render() {
     return (
-      <Context.Provider value={this.state}>
+      <Context.Provider
+        value={{ state: this.state, dispatch: this.dispatch, actions: actions }}
+      >
         {this.props.children}
       </Context.Provider>
     );

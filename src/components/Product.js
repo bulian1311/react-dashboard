@@ -39,7 +39,7 @@ class Product extends React.Component {
           <Typography className={classes.heading}>{product.title}</Typography>
         </ExpansionPanelSummary>
         {this.state.showDetails ? (
-          <React.Fragment>
+          <div>
             <ExpansionPanelDetails>
               <Typography>{product.description}</Typography>
             </ExpansionPanelDetails>
@@ -49,7 +49,7 @@ class Product extends React.Component {
             <ExpansionPanelDetails>
               <ImageList images={product.images} />
             </ExpansionPanelDetails>
-          </React.Fragment>
+          </div>
         ) : (
           ''
         )}

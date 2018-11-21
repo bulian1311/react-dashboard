@@ -27,7 +27,7 @@ const ImageList = ({ classes, images }) => {
       <GridList className={classes.gridList} cols={cols}>
         {images.map(image => (
           <GridListTile key={image.url}>
-            <img src={image.url} />
+            <img src={image.url} alt="qwe" />
           </GridListTile>
         ))}
       </GridList>

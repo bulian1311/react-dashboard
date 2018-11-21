@@ -57,11 +57,11 @@ export class Search extends Component {
             <SearchIcon />
           </div>
           <Context.Consumer>
-            {store => {
+            {context => {
               return (
                 <InputBase
                   onChange={event =>
-                    store.dispatch({
+                    context.dispatch({
                       type: SEARCH_CHANGE,
                       payload: event.target.value
                     })

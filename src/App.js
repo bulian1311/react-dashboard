@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     const { classes } = this.props;
 
-    if (!this.context.auth) {
+    if (!this.context.state.auth) {
       return <SignIn />;
     }
 

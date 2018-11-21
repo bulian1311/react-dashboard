@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Context from '../store/Context';
-import { SIGNIN } from '../store/types';
+import { SIGNIN, LOGIN, PASSWORD } from '../store/types';
 
 const styles = theme => ({
   main: {
@@ -61,14 +61,30 @@ class SignIn extends React.Component {
           <Typography component="h1" variant="h5">
             Авторизация
           </Typography>
-          <form className={classes.form}>
+          <form method="POST" className={classes.form}>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Адрес</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus />
+              <InputLabel htmlFor="login">Логин</InputLabel>
+              <Input
+                onChange={e =>
+                  this.context.dispatch({
+                    type: LOGIN,
+                    payload: e.target.value
+                  })
+                }
+                id="login"
+                name="login"
+                autoFocus
+              />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Пароль</InputLabel>
               <Input
+                onChange={e =>
+                  this.context.dispatch({
+                    type: PASSWORD,
+                    payload: e.target.value
+                  })
+                }
                 name="password"
                 type="password"
                 id="password"
