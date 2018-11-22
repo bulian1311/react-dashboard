@@ -1,7 +1,16 @@
-import { LOAD_MORE, SEARCH_CHANGE, SIGNIN, LOGIN, PASSWORD } from './types';
+import {
+  LOAD_MORE,
+  SEARCH_CHANGE,
+  SIGNIN,
+  LOGIN,
+  PASSWORD,
+  FETCH_PRODUCTS
+} from './types';
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case FETCH_PRODUCTS:
+      return { ...state, products: action.payload };
     case LOAD_MORE:
       return { ...state, visible: state.visible + 15 };
     case SEARCH_CHANGE:

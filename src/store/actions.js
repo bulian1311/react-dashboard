@@ -1,7 +1,15 @@
-import { SIGNIN, LOGIN, PASSWORD, SEARCH_CHANGE, LOAD_MORE } from './types';
+import axios from 'axios';
+import {
+  SIGNIN,
+  LOGIN,
+  PASSWORD,
+  SEARCH_CHANGE,
+  LOAD_MORE,
+  FETCH_PRODUCTS
+} from './types';
 
 const actions = {
-  signin: () => {
+  signin: (login, password) => {
     return { type: SIGNIN };
   },
 
@@ -21,6 +29,19 @@ const actions = {
       type: PASSWORD,
       payload: value
     };
+  },
+
+  fetchProducts: async () => {
+    let products;
+
+    try {
+      const res = await axios.get('http://magmer-api.herokuapp.com/product');
+      products = res.data;
+    } catch (err) {
+      console.error(err.message);
+    }
+
+    return { type: FETCH_PRODUCTS, payload: products };
   },
 
   searchChange: value => {

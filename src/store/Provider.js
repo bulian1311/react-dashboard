@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import Context from './Context';
 import reducer from './reducer';
@@ -21,12 +20,9 @@ class Provider extends Component {
   };
 
   async componentWillMount() {
-    try {
-      const res = await axios.get('http://magmer-api.herokuapp.com/product');
-      this.setState({ products: res.data });
-    } catch (err) {
-      console.error(err.message);
-    }
+    const action = await actions.fetchProducts();
+
+    this.dispatch(action);
   }
 
   render() {

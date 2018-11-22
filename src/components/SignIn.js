@@ -83,7 +83,9 @@ class SignIn extends React.Component {
             </FormControl>
 
             <Button
-              onClick={e => dispatch(actions.signin())}
+              onClick={e =>
+                dispatch(actions.signin(state.login, state.password))
+              }
               type="submit"
               fullWidth
               variant="contained"
