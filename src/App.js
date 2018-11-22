@@ -18,8 +18,9 @@ const styles = theme => ({
 class App extends Component {
   render() {
     const { classes } = this.props;
+    const { state } = this.context;
 
-    if (!this.context.state.auth) {
+    if (!state.auth) {
       return <SignIn />;
     }
 

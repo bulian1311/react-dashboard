@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import Context from '../store/Context';
-import { SIGNIN } from '../store/types';
 import Search from './Search';
 
 const drawerWidth = 240;
@@ -27,7 +26,7 @@ const NavBar = props => {
 
   return (
     <Context.Consumer>
-      {context => {
+      {({ dispatch, actions }) => {
         return (
           <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
@@ -36,7 +35,7 @@ const NavBar = props => {
               </Typography>
               <Search />
               <Button
-                onClick={e => context.dispatch({ type: SIGNIN })}
+                onClick={e => dispatch(actions.logout())}
                 className={classes.logoutButton}
                 color="inherit"
               >

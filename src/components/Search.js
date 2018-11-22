@@ -6,7 +6,6 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
 
 import Context from '../store/Context';
-import { SEARCH_CHANGE } from '../store/types';
 
 const styles = theme => ({
   search: {
@@ -49,6 +48,8 @@ const styles = theme => ({
 export class Search extends Component {
   render() {
     const { classes } = this.props;
+    const { dispatch, actions } = this.context;
+
     return (
       <div style={{ marginLeft: 100 }}>
         <div className={classes.grow} />
@@ -56,25 +57,15 @@ export class Search extends Component {
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
-          <Context.Consumer>
-            {context => {
-              return (
-                <InputBase
-                  onChange={event =>
-                    context.dispatch({
-                      type: SEARCH_CHANGE,
-                      payload: event.target.value
-                    })
-                  }
-                  placeholder="Поиск"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput
-                  }}
-                />
-              );
+
+          <InputBase
+            onChange={e => dispatch(actions.searchChange(e.target.value))}
+            placeholder="Поиск"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
             }}
-          </Context.Consumer>
+          />
         </div>
       </div>
     );
@@ -84,5 +75,7 @@ export class Search extends Component {
 Search.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+Search.contextType = Context;
 
 export default withStyles(styles)(Search);

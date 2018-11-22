@@ -6,7 +6,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 import Context from '../store/Context';
 import Product from './Product';
-import { LOAD_MORE } from '../store/types';
 
 const styles = theme => ({
   button: {
@@ -17,17 +16,18 @@ const styles = theme => ({
 
 class ProductList extends React.Component {
   renderList = data => {
+    const { state } = this.context;
     let products = [];
 
     if (data) {
       products = data;
     } else {
-      products = this.context.state.products;
+      products = state.products;
     }
 
     return (
       <React.Fragment>
-        {products.slice(0, this.context.state.visible).map(product => {
+        {products.slice(0, state.visible).map(product => {
           return <Product key={product.title} product={product} />;
         })}
 
@@ -38,12 +38,13 @@ class ProductList extends React.Component {
 
   renderMoreButton = products => {
     const { classes } = this.props;
+    const { dispatch, actions } = this.context;
 
     if (products.length > 15) {
       return (
         <Button
           className={classes.button}
-          onClick={e => this.context.dispatch({ type: LOAD_MORE })}
+          onClick={e => dispatch(actions.loadMore())}
         >
           Загрузить еще...
         </Button>
@@ -61,9 +62,11 @@ class ProductList extends React.Component {
   };
 
   renderSearch = () => {
-    const query = this.context.state.searchQuery.toLowerCase();
+    const { state } = this.context;
 
-    const searchData = this.context.state.products.filter(product => {
+    const query = state.searchQuery.toLowerCase();
+
+    const searchData = state.products.filter(product => {
       const title = product.title.toLowerCase();
       return title.includes(query);
     });
@@ -72,10 +75,11 @@ class ProductList extends React.Component {
   };
 
   render() {
+    const { state } = this.context;
     return (
       <React.Fragment>
-        {this.context.state.products
-          ? this.context.state.searchQuery
+        {state.products
+          ? state.searchQuery
             ? this.renderSearch()
             : this.renderList()
           : this.renderLoading()}

@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Context from '../store/Context';
-import { SIGNIN, LOGIN, PASSWORD } from '../store/types';
 
 const styles = theme => ({
   main: {
@@ -50,6 +49,7 @@ const styles = theme => ({
 class SignIn extends React.Component {
   render() {
     const { classes } = this.props;
+    const { state, dispatch, actions } = this.context;
 
     return (
       <main className={classes.main}>
@@ -65,12 +65,7 @@ class SignIn extends React.Component {
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="login">Логин</InputLabel>
               <Input
-                onChange={e =>
-                  this.context.dispatch({
-                    type: LOGIN,
-                    payload: e.target.value
-                  })
-                }
+                onChange={e => dispatch(actions.login(e.target.value))}
                 id="login"
                 name="login"
                 autoFocus
@@ -79,12 +74,7 @@ class SignIn extends React.Component {
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Пароль</InputLabel>
               <Input
-                onChange={e =>
-                  this.context.dispatch({
-                    type: PASSWORD,
-                    payload: e.target.value
-                  })
-                }
+                onChange={e => dispatch(actions.password(e.target.value))}
                 name="password"
                 type="password"
                 id="password"
@@ -93,7 +83,7 @@ class SignIn extends React.Component {
             </FormControl>
 
             <Button
-              onClick={e => this.context.dispatch({ type: SIGNIN })}
+              onClick={e => dispatch(actions.signin())}
               type="submit"
               fullWidth
               variant="contained"
