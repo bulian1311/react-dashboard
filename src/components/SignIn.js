@@ -61,40 +61,41 @@ class SignIn extends React.Component {
           <Typography component="h1" variant="h5">
             Авторизация
           </Typography>
-          <form method="POST" className={classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="login">Логин</InputLabel>
-              <Input
-                onChange={e => dispatch(actions.login(e.target.value))}
-                id="login"
-                name="login"
-                autoFocus
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Пароль</InputLabel>
-              <Input
-                onChange={e => dispatch(actions.password(e.target.value))}
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </FormControl>
 
-            <Button
-              onClick={e =>
-                dispatch(actions.signin(state.login, state.password))
-              }
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Войти
-            </Button>
-          </form>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="login">Логин</InputLabel>
+            <Input
+              onChange={e => dispatch(actions.login(e.target.value))}
+              id="login"
+              name="login"
+              autoFocus
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="password">Пароль</InputLabel>
+            <Input
+              onChange={e => dispatch(actions.password(e.target.value))}
+              name="password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+          </FormControl>
+
+          <Button
+            onClick={async e => {
+              const action = await actions.signin(state.login, state.password);
+
+              dispatch(action);
+            }}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Войти
+          </Button>
         </Paper>
       </main>
     );

@@ -6,6 +6,8 @@ export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 
 export const LOGIN = 'LOGIN';
 
+export const LOGOUT = 'LOGOUT';
+
 export const PASSWORD = 'PASSWORD';
 
 export const SIGNIN = 'SIGNIN';

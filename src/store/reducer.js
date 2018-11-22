@@ -4,6 +4,7 @@ import {
   SIGNIN,
   LOGIN,
   PASSWORD,
+  LOGOUT,
   FETCH_PRODUCTS
 } from './types';
 
@@ -16,11 +17,13 @@ const reducer = (state, action) => {
     case SEARCH_CHANGE:
       return { ...state, searchQuery: action.payload };
     case SIGNIN:
-      return { ...state, auth: !state.auth };
+      return { ...state, token: action.payload.token };
     case LOGIN:
       return { ...state, login: action.payload };
     case PASSWORD:
       return { ...state, password: action.payload };
+    case LOGOUT:
+      return { ...state, token: null };
     default:
       return state;
   }

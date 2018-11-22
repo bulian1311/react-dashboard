@@ -8,11 +8,10 @@ class Provider extends Component {
   state = {
     login: '',
     password: '',
-    token: '',
+    token: sessionStorage.getItem('token'),
     products: null,
     visible: 15,
-    searchQuery: '',
-    auth: false
+    searchQuery: ''
   };
 
   dispatch = action => {

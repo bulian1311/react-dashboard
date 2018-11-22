@@ -5,16 +5,30 @@ import {
   PASSWORD,
   SEARCH_CHANGE,
   LOAD_MORE,
-  FETCH_PRODUCTS
+  FETCH_PRODUCTS,
+  LOGOUT
 } from './types';
 
 const actions = {
-  signin: (login, password) => {
-    return { type: SIGNIN };
+  signin: async (login, password) => {
+    try {
+      const res = await axios.post('http://magmer-auth.herokuapp.com/', {
+        login,
+        password
+      });
+      if (res.data.token) {
+        sessionStorage.setItem('token', res.data.token);
+        return { type: SIGNIN, payload: res.data };
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+    return { type: '', payload: '' };
   },
 
   logout: () => {
-    return { type: SIGNIN };
+    sessionStorage.removeItem('token');
+    return { type: LOGOUT };
   },
 
   login: value => {
@@ -32,15 +46,13 @@ const actions = {
   },
 
   fetchProducts: async () => {
-    let products;
-
+    let products = [];
     try {
       const res = await axios.get('http://magmer-api.herokuapp.com/product');
       products = res.data;
     } catch (err) {
       console.error(err.message);
     }
-
     return { type: FETCH_PRODUCTS, payload: products };
   },
 

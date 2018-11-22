@@ -20,7 +20,7 @@ class App extends Component {
     const { classes } = this.props;
     const { state } = this.context;
 
-    if (!state.auth) {
+    if (!state.token) {
       return <SignIn />;
     }
 
