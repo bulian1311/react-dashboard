@@ -48,7 +48,9 @@ const actions = {
   fetchProducts: async () => {
     let products = [];
     try {
-      const res = await axios.get('http://magmer-api.herokuapp.com/product');
+      const res = await axios.get(
+        'http://magmer-api.herokuapp.com/product/list'
+      );
       products = res.data;
     } catch (err) {
       console.error(err.message);
